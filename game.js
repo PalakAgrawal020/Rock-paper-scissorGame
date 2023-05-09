@@ -4,36 +4,61 @@ function getComputerChoice() {
     return result;
 }
 
-function round(playerSelection, computerSelection) {
-    if(playerSelection == computerSelection){
-        return "It's a tie";
+
+let playerSelection = 'Rock';
+let computerSelection = getComputerChoice();
+
+
+function playRound(playerSelection, computerSelection) {
+    let playerScore = 0;
+    let computerScore = 0;
+    if(playerSelection === computerSelection){
+        return 0;
     }
-    if(playerSelection == 'ROCK'){
-        if(computerSelection == 'PAPER'){
-            return "You lose! Paper beats Rock";
-        }
-        else if(computerSelection == 'SCISSOR'){
-            return "You win! Rock beats Scissor";
-        }
+    else if(playerSelection === 'ROCK' && computerSelection === 'PAPER'){
+        return "You lose! Paper beats Rock";
     }
-    if(playerSelection == 'PAPER'){
-        if(computerSelection == 'ROCK'){
-            return "You win! Paper beats Rock";
-        }
-        else if(computerSelection == 'SCISSOR'){
-            return "You lose! Scissor beats Paper";
-        }
+    else if(playerSelection === 'PAPER' && computerSelection === 'SCISSOR'){
+        return "You lose! Scissor beats Paper";
     }
-    if(playerSelection == 'SCISSOR'){
-        if(computerSelection == 'ROCK'){
-            return "You lose! Rock beats Scissor";
-        }
-        else if(computerSelection == 'PAPER'){
-            return "You win! Scissor beats Paper";
-        }
+    else if(playerSelection === 'SCISSOR' && computerSelection==='ROCK'){
+        return "You lose! Rock beats Scissor";
+    }
+    else{
+        return 1;
     }
 }
 
-let playerSelection = 'ROck';
-let computerSelection = getComputerChoice();
-console.log(round(playerSelection.toUpperCase(), computerSelection.toUpperCase()));
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let i=0;
+    while(i<5){
+        let result = playRound(playerSelection.toUpperCase(), computerSelection.toUpperCase());
+        if(result === 1){
+            playerScore++;
+        }
+        else if(result === 0){
+            continue;
+        }
+        else {
+            computerScore++;
+        }
+        console.log(playerScore);
+        console.log(computerScore);
+        i++;
+    }
+
+    
+    if(playerScore > computerScore){
+        return "Player Wins";
+    }
+    else if(playerScore === computerScore){
+        return "Tied";
+    }
+    else {
+        return "Computer Wins";
+    }
+}
+
+console.log(game());
